@@ -1,0 +1,65 @@
+# ============================================================================
+#  VERSION CATALOG  —  the single source of truth for every dependency version
+# ----------------------------------------------------------------------------
+#  Referenced from build.gradle.kts as `libs.<alias>` where dashes become dots.
+#  e.g.  androidx-core-ktx   ->   libs.androidx.core.ktx
+#  Changing a version here changes it everywhere. Never hardcode a version in
+#  a build.gradle.kts file.
+# ============================================================================
+[versions]
+# --- Build tooling ---
+agp = "9.5.1"                      # Android Gradle Plugin (Kotlin support is built in since AGP 9)
+kotlin = "2.4.21"                  # Kotlin language + Compose compiler plugin
+googleServices = "4.6.0"           # Reads google-services.json -> Firebase config
+
+# --- AndroidX core ---
+coreKtx = "1.19.1"
+lifecycle = "2.11.0"               # ViewModel, lifecycle-aware state collection
+activityCompose = "1.13.0"
+navigationCompose = "2.10.2"
+
+# --- UI ---
+composeBom = "2026.09.00"          # Pins ALL androidx.compose.* versions together
+
+# --- Async ---
+coroutines = "1.11.0"
+
+# --- Backend ---
+firebaseBom = "35.2.0"             # Pins all com.google.firebase.* versions together
+
+# --- Testing ---
+junit = "4.13.2"
+
+[libraries]
+# --- AndroidX core ---
+androidx-core-ktx                = { group = "androidx.core",      name = "core-ktx",                 version.ref = "coreKtx" }
+androidx-lifecycle-runtime-ktx   = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx",    version.ref = "lifecycle" }
+androidx-lifecycle-viewmodel     = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+androidx-activity-compose        = { group = "androidx.activity",   name = "activity-compose",        version.ref = "activityCompose" }
+androidx-navigation-compose      = { group = "androidx.navigation", name = "navigation-compose",      version.ref = "navigationCompose" }
+
+# --- Compose (versions come from the BOM, so none are declared here) ---
+androidx-compose-bom             = { group = "androidx.compose",          name = "compose-bom", version.ref = "composeBom" }
+androidx-ui                      = { group = "androidx.compose.ui",       name = "ui" }
+androidx-ui-graphics             = { group = "androidx.compose.ui",       name = "ui-graphics" }
+androidx-ui-tooling              = { group = "androidx.compose.ui",       name = "ui-tooling" }
+androidx-ui-tooling-preview      = { group = "androidx.compose.ui",       name = "ui-tooling-preview" }
+androidx-material3               = { group = "androidx.compose.material3", name = "material3" }
+
+# --- Coroutines ---
+coroutines-android               = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android",       version.ref = "coroutines" }
+coroutines-play-services         = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version.ref = "coroutines" }
+
+# --- Firebase (versions come from the BOM) ---
+firebase-bom                     = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-auth                    = { group = "com.google.firebase", name = "firebase-auth" }
+
+# --- Testing ---
+junit                            = { group = "junit",                 name = "junit",                   version.ref = "junit" }
+coroutines-test                  = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+
+[plugins]
+android-application = { id = "com.android.application",               version.ref = "agp" }
+kotlin-compose      = { id = "org.jetbrains.kotlin.plugin.compose",   version.ref = "kotlin" }
+google-services     = { id = "com.google.gms.google-services",        version.ref = "googleServices" }

@@ -1,0 +1,9 @@
+<resources>
+    <!--
+      values-night/ is a RESOURCE QUALIFIER directory. Android automatically
+      picks this file instead of values/colors.xml when the device is in dark
+      mode — no code, no if-statement. Same mechanism as values-hi for Hindi or
+      drawable-xxhdpi for high-density screens.
+    -->
+    <color name="window_background">#0D1117</color>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 12+ replacement for backup_rules.xml. Both are declared so the
+     exclusions apply on every supported API level. -->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="sharedpref" path="neuroverse_session.xml" />
+        <exclude domain="sharedpref" path="neuroverse_local_accounts.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="sharedpref" path="neuroverse_session.xml" />
+        <exclude domain="sharedpref" path="neuroverse_local_accounts.xml" />
+    </device-transfer>
+</data-extraction-rules>

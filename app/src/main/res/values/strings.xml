@@ -1,0 +1,12 @@
+<resources>
+    <!--
+      User-visible text belongs here, not hardcoded in Kotlin, so the app can be
+      translated by adding values-hi/strings.xml with no code change.
+
+      NOTE: the auth screens in this app currently hold their copy inline for
+      readability while you are learning the Compose code. Extracting all of it
+      to this file is the correct next step before any real release, and is
+      called out in the README as a known limitation.
+    -->
+    <string name="app_name">NeuroVerse Auth</string>
+</resources>

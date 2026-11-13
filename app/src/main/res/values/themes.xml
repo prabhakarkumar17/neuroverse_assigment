@@ -1,0 +1,10 @@
+<resources>
+    <!--
+      A Compose app still needs ONE Android XML theme. It styles the window
+      itself — the background shown while the process starts, before Compose has
+      drawn anything. Without it the app flashes white on launch.
+    -->
+    <style name="Theme.NeuroVerse" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+    </style>
+</resources>

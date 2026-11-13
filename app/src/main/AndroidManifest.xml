@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The manifest is what Android reads BEFORE running any of our code: which
+  permissions we need, which class is the Application, which Activity launches.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+      INTERNET is required to talk to Firebase over HTTPS (spec 5).
+      ACCESS_NETWORK_STATE lets us distinguish "offline" from "server error"
+      when reporting failures (spec test scenario 10).
+
+      Both are "normal" permissions: granted at install, no runtime prompt.
+      Nothing else is requested — an auth app has no business asking for
+      contacts, storage or location, and every permission you do not request is
+      one you can never misuse.
+    -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".AuthApplication"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.NeuroVerse">
+
+        <!--
+          allowBackup="false" is a DELIBERATE security decision, not a default.
+          With backup enabled, Android copies our SharedPreferences to the
+          user's cloud account. Our session blob is encrypted with a key that
+          lives in THIS device's Keystore and is not backed up, so a restored
+          copy would be undecryptable anyway. Excluding it outright is cleaner
+          than shipping ciphertext we know can never be read.
+        -->
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.NeuroVerse"
+            android:windowSoftInputMode="adjustResize">
+
+            <!--
+              android:exported="true" is required on the launcher activity (and
+              mandatory to declare since Android 12). It is the ONLY exported
+              component here: nothing else in this app can be started by another
+              app.
+
+              windowSoftInputMode="adjustResize" makes the window shrink when
+              the keyboard opens, which is what lets imePadding() in AuthScaffold
+              do its job.
+            -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

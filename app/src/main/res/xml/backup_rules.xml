@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Backup is disabled in the manifest; this file exists because the manifest
+     attribute references it. See the comment on allowBackup. -->
+<full-backup-content>
+    <exclude domain="sharedpref" path="neuroverse_session.xml" />
+    <exclude domain="sharedpref" path="neuroverse_local_accounts.xml" />
+</full-backup-content>

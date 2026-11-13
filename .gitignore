@@ -1,0 +1,33 @@
+# ---- Gradle ----
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# ---- Machine-specific: MUST NOT be committed ----
+local.properties
+
+# ---- Firebase configuration (environment-specific) ----
+# Contains no secret, but is per-project. See README section 5.
+app/google-services.json
+
+# ---- Android Studio / IntelliJ ----
+.idea/
+*.iml
+captures/
+.externalNativeBuild/
+.cxx/
+
+# ---- Build artifacts ----
+*.apk
+*.aab
+*.ap_
+*.dex
+output.json
+
+# ---- Signing material: NEVER commit ----
+*.jks
+*.keystore
+keystore.properties
+
+# ---- OS ----
+.DS_Store
