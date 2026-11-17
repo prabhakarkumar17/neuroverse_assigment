@@ -34,8 +34,16 @@ android {
 
     buildTypes {
         debug {
-            // Lets a debug and a release build live on the same device at once.
-            applicationIdSuffix = ".debug"
+            // NOTE: no applicationIdSuffix.
+            // Debug builds deliberately use the SAME applicationId as release
+            // (com.neuroverse.authapp) so that a single Firebase Android app
+            // registration covers both. Adding a suffix here would make debug
+            // builds install as com.neuroverse.authapp.debug, which Firebase
+            // would treat as a different app and reject with
+            // "No matching client found for package name".
+            //
+            // Trade-off: a debug and a release build can no longer be installed
+            // side by side on one device.
         }
         release {
             isMinifyEnabled = true      // R8: strip unused code

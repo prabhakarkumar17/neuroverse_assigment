@@ -1,5 +1,6 @@
 package com.neuroverse.authapp.data.repository
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
@@ -44,6 +45,10 @@ class FirebaseAuthRepository(
     private val firebaseAuth: FirebaseAuth,
     private val sessionStore: SessionStore
 ) : AuthRepository {
+
+    private companion object {
+        const val TAG = "FirebaseAuth"
+    }
 
     override val providerName: String = "Firebase Authentication"
 
@@ -187,6 +192,18 @@ class FirebaseAuthRepository(
         is FirebaseAuthInvalidCredentialsException -> AuthError.InvalidCredentials
 
         is IOException                           -> AuthError.Network
-        else                                     -> AuthError.Unknown(e)
+
+        else -> {
+            // The user is deliberately shown only "Something went wrong" so that
+            // provider internals are never disclosed (spec 5). But swallowing the
+            // cause entirely makes real misconfiguration undiagnosable, so log it.
+            //
+            // Common causes seen here:
+            //   CONFIGURATION_NOT_FOUND -> the Email/Password sign-in provider is
+            //                              not enabled in the Firebase console
+            //   API key not valid       -> google-services.json does not match the project
+            Log.e(TAG, "Unmapped Firebase auth failure: ${e.javaClass.simpleName}: ${e.message}", e)
+            AuthError.Unknown(e)
+        }
     }
 }
