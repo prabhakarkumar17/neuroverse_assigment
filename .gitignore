@@ -29,5 +29,8 @@ output.json
 *.keystore
 keystore.properties
 
+# ---- Documentation (kept local, not in version control) ----
+docs/
+
 # ---- OS ----
 .DS_Store
